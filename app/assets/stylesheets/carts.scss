@@ -31,7 +31,7 @@
       border-top: solid thin;
     }
   }
-  input[type="submit"] {
+  button[type="submit"] {
     background-color: #881;
     border-radius: 0.354em;
     border: solid thin #441;
@@ -39,7 +39,7 @@
     font-size: 1em;
     padding: 0.354em 1em;
   }
-  input[type="submit"]:hover {
+  button[type="submit"]:hover {
     background-color: #992;
   }
 }
