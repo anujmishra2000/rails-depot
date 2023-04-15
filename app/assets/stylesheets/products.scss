@@ -1,6 +1,24 @@
 .products {
   margin: 0;
   padding: 0.5em;
+  input[type="submit"] {
+    background-color: #282;
+    border-radius: 0.354em;
+    border: solid thin #141;
+    color: white;
+    font-size: 1em;
+    padding: 0.354em 1em;
+  }
+  input[type="submit"]:hover {
+    background-color: #141;
+  }
+  input, textarea, select, option {
+    border: solid thin #888;
+    box-sizing: border-box;
+    font-size: 1em;
+    padding: 0.5em;
+    width: 100%;
+  }
   a {
     padding: 0.354em 0.5em;
     border-radius: 0.354em;
