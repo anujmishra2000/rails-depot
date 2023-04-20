@@ -2,11 +2,7 @@ class User < ApplicationRecord
   validates :name, presence: true, uniqueness: true
   has_secure_password
 
-  # Uniqueness of email
-  validates :email, uniqueness: true
-
-  # Email format
-  validates :email,format: { with: URI::MailTo::EMAIL_REGEXP}
+  validates :email, uniqueness: { case_sensitive: false }, email:true
 
   after_destroy :ensure_an_admin_remains
 
