@@ -2,7 +2,7 @@ class User < ApplicationRecord
   validates :name, presence: true, uniqueness: true
   has_secure_password
 
-  validates :email, uniqueness: { case_sensitive: false }, email:true
+  validates :email, uniqueness: { case_sensitive: false }, email: true
 
   after_destroy :ensure_an_admin_remains
 
