@@ -6,34 +6,30 @@ class User < ApplicationRecord
 
   after_destroy :ensure_an_admin_remains
   after_create_commit :send_welcome_email
-  before_destroy :do_not_destroy_admin, if: :is_admin?
-  before_update :do_not_update_admin, if: -> { :is_admin? || was_admin? }
+  before_destroy :ensure_do_not_destroy_admin
+  before_update :ensure_do_not_update_admin
 
   class Error < StandardError
   end
 
   private
 
-  def is_admin?
-    email == ADMIN_EMAIL
-  end
-
-  def was_admin?
-    email_was == ADMIN_EMAIL
-  end
-
   def send_welcome_email
     UserMailer.welcome(self).deliver_now
   end
 
-  def do_not_destroy_admin
-    errors.add(:base, 'Cannot destroy Admin')
-    throw :abort
+  def ensure_do_not_destroy_admin
+    if email == ::ADMIN_EMAIL
+      errors.add(:base, 'Cannot destroy Admin')
+      throw :abort
+    end
   end
 
-  def do_not_update_admin
-    errors.add(:base, 'Cannot update Admin')
-    throw :abort
+  def ensure_do_not_update_admin
+    if email_was == ::ADMIN_EMAIL
+      errors.add(:base, 'Cannot update Admin')
+      throw :abort
+    end
   end
 
   def ensure_an_admin_remains

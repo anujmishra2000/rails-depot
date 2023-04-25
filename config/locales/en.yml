@@ -58,6 +58,8 @@ en:
       purchase_order_pay_type:
         po_number: "PO #"
 
-
   thanks:          "Thank you for your order"
-  welcome:         "welcome"
+
+  user_mailer:
+    welcome:
+      welcome: "Welcome"
