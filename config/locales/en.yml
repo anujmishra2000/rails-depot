@@ -62,4 +62,4 @@ en:
 
   user_mailer:
     welcome:
-      welcome: "Welcome"
+      subject: "Welcome %{name}"
