@@ -12,7 +12,7 @@ en:
   errors:
     template:
       body:        "There were problems with the following fields:"
-      header:       
+      header:
         one:       "1 error prohibited this %{model} from being saved"
         other:     "%{count} errors prohibited this %{model} from being saved"
 
@@ -60,3 +60,4 @@ en:
 
 
   thanks:          "Thank you for your order"
+  welcome:         "welcome"

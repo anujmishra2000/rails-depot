@@ -3,8 +3,8 @@ class Product < ApplicationRecord
   has_many :orders, through: :line_items
 
   before_destroy :ensure_not_referenced_by_any_line_item
-  before_validation :ensure_give_default_to_title, unless: :title?
-  before_validation :ensure_discount_price_if_not_specified, unless: :discount_price?
+  after_initialize :set_title, unless: :title?
+  before_validation :set_discount_price, unless: :discount_price?
 
   validates :title, :description, :image_url, :price, :discount_price, presence: true
   validates :title, uniqueness: true
@@ -17,11 +17,11 @@ class Product < ApplicationRecord
 
   private
 
-  def ensure_discount_price_if_not_specified
+  def set_discount_price
     self.discount_price = price
   end
 
-  def ensure_give_default_to_title
+  def set_title
     self.title = 'abc'
   end
   # ensure that there are no line items referencing this product
