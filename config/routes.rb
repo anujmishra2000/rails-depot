@@ -13,6 +13,9 @@ Rails.application.routes.draw do
     post 'login' => :create
     delete 'logout' => :destroy
   end
+
+  get 'users/orders', to: 'users#orders'
+  get 'users/line_items', to: 'users#line_items'
   get 'sessions/create'
   get 'sessions/destroy'
 

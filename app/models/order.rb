@@ -1,16 +1,17 @@
-
 require 'pago'
 
 class Order < ApplicationRecord
   enum pay_type: {
-    "Check"          => 0, 
-    "Credit card"    => 1, 
+    "Check"          => 0,
+    "Credit card"    => 1,
     "Purchase order" => 2
   }
   has_many :line_items, dependent: :destroy
+  belongs_to :user
   # ...
   validates :name, :address, :email, presence: true
   validates :pay_type, inclusion: pay_types.keys
+
   def add_line_items_from_cart(cart)
     cart.line_items.each do |item|
       item.cart_id = nil
@@ -48,6 +49,12 @@ class Order < ApplicationRecord
       OrderMailer.received(self).deliver_later
     else
       raise payment_result.error
+    end
+  end
+
+  def total_price
+    line_items.inject 0 do |total_price, line_item|
+      total_price += line_item.total_price
     end
   end
 end

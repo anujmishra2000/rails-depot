@@ -1,0 +1,19 @@
+<% total = 0%>
+<% @orders.each do |order|%>
+  <%order_count = order.id%>
+  <h1><%="ORDER #{order_count}"%></h1>
+  <h3>Id</h3>
+  <%= order.id%>
+  <h3>Name</h3>
+  <%= order.name%>
+  <h3>Address</h3>
+  <%= order.address%>
+  <h3>Email</h3>
+  <%= order.email%>
+  <h3>Pay Type</h3>
+  <%= order.pay_type%>
+  <h3>Total Price</h3>
+  <%="total price is: #{order.total_price}"%>
+  <br><br><br>
+<%end%>
+<%= will_paginate @orders %>

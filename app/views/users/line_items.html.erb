@@ -1,0 +1,14 @@
+<% @line_items.each do |line_item|%>
+  <%total_line_items = line_item.id%>
+  <h1><%="LINE ITEM: #{total_line_items}"%>
+  <h3>Line Item ID<h3>
+  <%= line_item.id%>
+  <h3>Product Id<h3>
+  <%= line_item.product_id%>
+  <h3>Quantity<h3>
+  <%= line_item.quantity%>
+  <h3>Order ID<h3>
+  <%= line_item.order_id%>
+  <br>
+<%end%>
+<%= will_paginate @line_items %>
