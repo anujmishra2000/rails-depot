@@ -17,7 +17,7 @@ class Product < ApplicationRecord
 
   scope :enabled, -> { where(enabled: true) }
   scope :ordered_atleast_once, -> { joins(:line_items).distinct }
-  scope :title_ordered_atleast_once, -> { ordered_atleast_once.pluck(:title) }
+  scope :title_for_ordered_atleast_once, -> { ordered_atleast_once.pluck(:title) }
 
   private
 
