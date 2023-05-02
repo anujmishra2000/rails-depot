@@ -1,11 +1,3 @@
-#---
-# Excerpted from "Agile Web Development with Rails 6",
-# published by The Pragmatic Bookshelf.
-# Copyrights apply to this code. It may not be used to create training material,
-# courses, books, articles, and the like. Contact us if you are in doubt.
-# We make no guarantees that this code is fit for any purpose.
-# Visit http://www.pragmaticprogrammer.com/titles/rails6 for more book information.
-#---
 Rails.application.routes.draw do
   get 'admin' => 'admin#index'
   controller :sessions do
@@ -13,10 +5,21 @@ Rails.application.routes.draw do
     post 'login' => :create
     delete 'logout' => :destroy
   end
+
   get 'sessions/create'
   get 'sessions/destroy'
 
-  resources :users
+  resources :users do
+    # revisit once during routing
+    # resources :users do
+    #   get 'orders', to: 'users#orders'
+    # end
+    collection do
+      get 'orders', to: 'users#orders'
+      get 'line_items', to: 'users#line_items'
+    end
+  end
+
   resources :products do
     get :who_bought, on: :member
   end

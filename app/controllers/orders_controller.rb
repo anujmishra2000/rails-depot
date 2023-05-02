@@ -1,11 +1,3 @@
-#---
-# Excerpted from "Agile Web Development with Rails 6",
-# published by The Pragmatic Bookshelf.
-# Copyrights apply to this code. It may not be used to create training material,
-# courses, books, articles, and the like. Contact us if you are in doubt.
-# We make no guarantees that this code is fit for any purpose.
-# Visit http://www.pragmaticprogrammer.com/titles/rails6 for more book information.
-#---
 class OrdersController < ApplicationController
   skip_before_action :authorize, only: [:new, :create]
   include CurrentCart
@@ -38,13 +30,14 @@ class OrdersController < ApplicationController
   def create
     @order = Order.new(order_params)
     @order.add_line_items_from_cart(@cart)
+    @order.user_id = session[:user_id]
 
     respond_to do |format|
       if @order.save
         Cart.destroy(session[:cart_id])
         session[:cart_id] = nil
         ChargeOrderJob.perform_later(@order,pay_type_params.to_h)
-        format.html { redirect_to store_index_url, notice: 
+        format.html { redirect_to store_index_url, notice:
           'Thank you for your order.' }
         format.json { render :show, status: :created,
           location: @order }
@@ -93,23 +86,23 @@ class OrdersController < ApplicationController
   #...
 
   private
-     def ensure_cart_isnt_empty
-       if @cart.line_items.empty?
-         redirect_to store_index_url, notice: 'Your cart is empty'
-       end
-     end
 
-      
-    def pay_type_params
-      if order_params[:pay_type] == "Credit card"
-        params.require(:order).permit(:credit_card_number, :expiration_date)
-      elsif order_params[:pay_type] == "Check"
-        params.require(:order).permit(:routing_number, :account_number)
-      elsif order_params[:pay_type] == "Purchase order"
-        params.require(:order).permit(:po_number)
-      else
-        {}
-      end
+  def ensure_cart_isnt_empty
+    if @cart.line_items.empty?
+      redirect_to store_index_url, notice: 'Your cart is empty'
     end
+  end
 
+
+  def pay_type_params
+    if order_params[:pay_type] == "Credit card"
+      params.require(:order).permit(:credit_card_number, :expiration_date)
+    elsif order_params[:pay_type] == "Check"
+      params.require(:order).permit(:routing_number, :account_number)
+    elsif order_params[:pay_type] == "Purchase order"
+      params.require(:order).permit(:po_number)
+    else
+      {}
+    end
+  end
 end

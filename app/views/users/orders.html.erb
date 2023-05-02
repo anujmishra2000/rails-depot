@@ -1,0 +1,31 @@
+<% if @orders.empty? %>
+  <h3> No Order placed </h3>
+<% else %>
+  <style>
+    table, th, td {
+      border:1px solid black;
+    }
+  </style>
+  <h1> Order Details </h1>
+  <table style="width:100%">
+    <tr>
+      <th>Id</th>
+      <th>Name</th>
+      <th>Address</th>
+      <th>Email</th>
+      <th>Pay Type</th>
+      <th>Total Price</th>
+    </tr>
+    <% @orders.each do |order|%>
+      <tr>
+        <td><%= order.id%></td>
+        <td><%= order.name%></td>
+        <td><%= order.address%></td>
+        <td><%= order.email%></td>
+        <td><%= order.pay_type%></td>
+        <td><%= order.total_price%></td>
+      </tr>
+    <%end%>
+  </table>
+<%end%>
+<%= will_paginate @orders %>

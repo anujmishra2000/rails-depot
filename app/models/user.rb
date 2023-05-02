@@ -1,4 +1,6 @@
 class User < ApplicationRecord
+  has_many :orders, dependent: :restrict_with_error
+  has_many :line_items, through: :orders
 
   validates :name, presence: true, uniqueness: true
   has_secure_password

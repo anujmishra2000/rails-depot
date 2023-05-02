@@ -1,0 +1,27 @@
+<% if @line_items.empty? %>
+  <h3> No Line Items Present </h3>
+<% else %>
+  <style>
+    table, th, td {
+      border:1px solid black;
+    }
+  </style>
+  <h1> Line Item Details </h1>
+  <table style="width:100%">
+    <tr>
+      <th>Id</th>
+      <th>Product Id</th>
+      <th>Quantity</th>
+      <th>Order Id</th>
+    </tr>
+    <% @line_items.each do |line_item|%>
+      <tr>
+        <td><%= line_item.id%></td>
+        <td><%= line_item.product_id%></td>
+        <td><%= line_item.quantity%></td>
+        <td><%= line_item.order_id%></td>
+      </tr>
+    <%end%>
+  </table>
+<%end%>
+<%= will_paginate @line_items %>
