@@ -1,6 +1,5 @@
 class UsersController < ApplicationController
   before_action :set_user, only: [:show, :edit, :update, :destroy]
-  before_action :set_current_user, only: [:orders, :line_items]
   # GET /users
   # GET /users.json
   def index
@@ -71,11 +70,11 @@ class UsersController < ApplicationController
   end
 
   def orders
-    @orders = @user.orders.paginate(page: params[:page], per_page: 5)
+    @orders = current_user.orders.paginate(page: params[:page], per_page: 5)
   end
 
   def line_items
-    @line_items = @user.line_items.paginate(page: params[:page], per_page: 5)
+    @line_items = current_user.line_items.paginate(page: params[:page], per_page: 5)
   end
 
   private
@@ -85,11 +84,8 @@ class UsersController < ApplicationController
     @user = User.find(params[:id])
   end
 
-  def set_current_user
-    @user = User.find(session[:user_id])
-  end
   # Only allow a list of trusted parameters through.
   def user_params
-    params.require(:user).permit(:name, :password, :password_confirmation)
+    params.require(:user).permit(:name, :email, :password, :password_confirmation)
   end
 end

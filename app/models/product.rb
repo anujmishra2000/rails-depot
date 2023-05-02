@@ -15,9 +15,9 @@ class Product < ApplicationRecord
   after_initialize :set_title, unless: :title?
   before_validation :set_discount_price, unless: :discount_price?
 
-  scope :enabled_products, -> { where enabled: true }
-  scope :product_ordered, -> { joins(:line_items).distinct }
-  scope :product_title_ordered, -> { product_ordered.pluck :title }
+  scope :enabled, -> { where(enabled: true) }
+  scope :ordered_atleast_once, -> { joins(:line_items).distinct }
+  scope :title_ordered_atleast_once, -> { ordered_atleast_once.pluck(:title) }
 
   private
 

@@ -12,7 +12,7 @@ class Order < ApplicationRecord
   validates :name, :address, :email, presence: true
   validates :pay_type, inclusion: pay_types.keys
 
-  scope :by_date, -> (from = Time.now.midnight, to = Time.now) { where(created_at: from..to) }
+  scope :by_date, -> (from = Time.current.beginning_of_day, to = Time.current.end_of_day) { where(created_at: (from..to)) }
 
   def add_line_items_from_cart(cart)
     cart.line_items.each do |item|
@@ -55,8 +55,6 @@ class Order < ApplicationRecord
   end
 
   def total_price
-    line_items.inject 0 do |total_price, line_item|
-      total_price += line_item.total_price
-    end
+    line_items.sum(&:total_price)
   end
 end
