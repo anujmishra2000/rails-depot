@@ -9,6 +9,8 @@ Rails.application.routes.draw do
   get 'sessions/create'
   get 'sessions/destroy'
 
+  resources :category
+
   resources :users do
     # revisit once during routing
     # resources :users do

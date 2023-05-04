@@ -2,6 +2,7 @@ class Product < ApplicationRecord
   has_many :line_items, dependent: :restrict_with_error
   has_many :orders, through: :line_items
   has_many :carts, through: :line_items
+  belongs_to :category, counter_cache: true
 
   validates :title, :description, :image_url, :price, :discount_price, presence: true
   validates :title, uniqueness: true
@@ -14,12 +15,25 @@ class Product < ApplicationRecord
 
   after_initialize :set_title, unless: :title?
   before_validation :set_discount_price, unless: :discount_price?
+  after_save_commit :set_count_on_save
+  after_destroy_commit :set_count_on_destroy
 
   scope :enabled, -> { where(enabled: true) }
   scope :ordered_atleast_once, -> { joins(:line_items).distinct }
   scope :title_for_ordered_atleast_once, -> { ordered_atleast_once.pluck(:title) }
 
   private
+
+  def set_count_on_save
+    unless category_id_before_last_save.nil?
+      Category.find(category_id_before_last_save).parent_category&.decrement!(:products_count)
+    end
+    category.parent_category&.increment!(:products_count)
+  end
+
+  def set_count_on_destroy
+    category.parent_category&.decrement!(:products_count)
+  end
 
   def set_discount_price
     self.discount_price = price
