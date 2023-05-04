@@ -14,7 +14,7 @@ class Category < ApplicationRecord
 
   def set_products_count
     Category.find(parent_category_id_before_last_save).decrement!(:products_count, products_count)
-    super_category&.increment!(:products_count, products_count)
+    parent_category&.increment!(:products_count, products_count)
   end
 
   def has_parent_category_id_changed?
