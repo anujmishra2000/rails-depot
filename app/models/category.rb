@@ -13,7 +13,7 @@ class Category < ApplicationRecord
   scope :root, -> { where(parent_id: nil) }
 
   def update_products_count
-    parent&.update_columns(products_count: (products.size + sub_categories_products.size))
+    parent&.update_columns(products_count: (parent.products.size + parent.sub_categories_products.size))
     update_columns(products_count: (products.size + sub_categories_products.size))
   end
 
