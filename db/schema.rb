@@ -67,11 +67,11 @@ ActiveRecord::Schema[7.0].define(version: 2023_05_03_135710) do
 
   create_table "categories", force: :cascade do |t|
     t.string "name"
-    t.integer "parent_category_id"
+    t.integer "parent_id"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.integer "products_count", default: 0, null: false
-    t.index ["parent_category_id"], name: "index_categories_on_parent_category_id"
+    t.index ["parent_id"], name: "index_categories_on_parent_id"
   end
 
   create_table "line_items", force: :cascade do |t|
@@ -131,7 +131,7 @@ ActiveRecord::Schema[7.0].define(version: 2023_05_03_135710) do
 
   add_foreign_key "active_storage_attachments", "active_storage_blobs", column: "blob_id"
   add_foreign_key "active_storage_variant_records", "active_storage_blobs", column: "blob_id"
-  add_foreign_key "categories", "categories", column: "parent_category_id"
+  add_foreign_key "categories", "categories", column: "parent_id"
   add_foreign_key "line_items", "carts"
   add_foreign_key "line_items", "orders"
   add_foreign_key "line_items", "products"

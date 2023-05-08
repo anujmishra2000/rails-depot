@@ -2,7 +2,7 @@ class Product < ApplicationRecord
   has_many :line_items, dependent: :restrict_with_error
   has_many :orders, through: :line_items
   has_many :carts, through: :line_items
-  belongs_to :category, counter_cache: true
+  belongs_to :category
 
   validates :title, :description, :image_url, :price, :discount_price, presence: true
   validates :title, uniqueness: true
@@ -26,13 +26,13 @@ class Product < ApplicationRecord
 
   def set_count_on_save
     unless category_id_before_last_save.nil?
-      Category.find(category_id_before_last_save).parent_category&.decrement!(:products_count)
+      Category.find(category_id_before_last_save).update_products_count
     end
-    category.parent_category&.increment!(:products_count)
+    category.update_products_count
   end
 
   def set_count_on_destroy
-    category.parent_category&.decrement!(:products_count)
+    category.update_products_count
   end
 
   def set_discount_price
