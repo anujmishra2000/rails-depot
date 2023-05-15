@@ -14,6 +14,7 @@ class UsersController < ApplicationController
   # GET /users/new
   def new
     @user = User.new
+    @user.build_address
   end
 
   # GET /users/1/edit
@@ -71,10 +72,12 @@ class UsersController < ApplicationController
 
   def orders
     @orders = current_user.orders.paginate(page: params[:page], per_page: 5)
+    render layout: "myorders"
   end
 
   def line_items
     @line_items = current_user.line_items.paginate(page: params[:page], per_page: 5)
+    render layout: "myorders"
   end
 
   private
@@ -86,6 +89,6 @@ class UsersController < ApplicationController
 
   # Only allow a list of trusted parameters through.
   def user_params
-    params.require(:user).permit(:name, :email, :password, :password_confirmation)
+    params.require(:user).permit(:name, :email, :password, :password_confirmation, address_attributes: [:state, :country, :city, :pincode])
   end
 end

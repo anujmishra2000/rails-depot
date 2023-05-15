@@ -1,9 +1,14 @@
+<%= javascript_pack_tag 'slider' %>
 <% if notice %>
   <aside id="notice"><%= notice %></aside>
 <% end %>
 
 <h1>Products</h1>
-
+<tbody>
+<% @products.each do |product| %>
+  <%= render product %>
+<% end %>
+</tbody>
 <table>
   <tfoot>
     <tr>
@@ -12,33 +17,5 @@
       </td>
     </tr>
   </tfoot>
-  <tbody>
-    <% @products.each do |product| %>
-      <tr class="<%= cycle('list_line_odd', 'list_line_even') %>">
 
-        <td class="image">
-          <%= image_tag(product.image_url, class: 'list_image') %>
-        </td>
-
-        <td class="description">
-          <h1><%= product.title %></h1>
-          <p>
-            <%= truncate(strip_tags(product.description), length: 80) %>
-          </p>
-        </td>
-
-        <td class="actions">
-          <ul>
-            <li><%= link_to 'Show', product %></li>
-            <li><%= link_to 'Edit', edit_product_path(product) %></li>
-            <li>
-              <%= link_to 'Destroy',  product, 
-                          method: :delete,
-                          data: { confirm: 'Are you sure?' } %>
-            </li>
-          </ul>
-        </td>
-      </tr>
-    <% end %>
-  </tbody>
 </table>

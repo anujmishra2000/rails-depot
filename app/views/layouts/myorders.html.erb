@@ -1,0 +1,27 @@
+<! DOCTYPE html>
+<html>
+  <head>
+    <title>Pragprog Books Online Store</title>
+    <meta name="viewport" content="width=device-width,initial-scale=1">
+    <%= csrf_meta_tags %>
+    <%= csp_meta_tag %>
+    <%= stylesheet_link_tag "myorders", media: 'all', "data-turbo-track": "reload" %>
+    <%= javascript_importmap_tags %>
+  </head>
+  <body>
+    <table>
+      <tr>
+        <td class="left">
+          <nav class="side_nav">
+            <ul>
+              <li><%= button_to 'Logout', logout_path, method: :delete %></li>
+            </ul>
+          </nav>
+        </td>
+        <td class="right">
+          <%= yield %>
+        </td>
+      </tr>
+    </table>
+  </body>
+</html>
