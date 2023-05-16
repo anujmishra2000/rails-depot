@@ -1,8 +1,8 @@
 <div id="<%= dom_id product %>">
 
 <div class="slider">
-<% product.images.to_a.each do |img| %>
-  <%= image_tag(img, class: 'slider-img') if img.present? %>
+<% product.images.each do |img| %>
+  <%= image_tag(img, class: 'slider-img') %>
   <% end %>
 </div>
 <div class="navigation-button">
