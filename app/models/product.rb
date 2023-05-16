@@ -2,6 +2,7 @@ class Product < ApplicationRecord
   has_many :line_items, dependent: :restrict_with_error
   has_many :orders, through: :line_items
   has_many :carts, through: :line_items
+  has_many_attached :images, dependent: :destroy
   belongs_to :category
 
   validates :title, :description, :image_url, :price, :discount_price, presence: true
@@ -12,6 +13,7 @@ class Product < ApplicationRecord
   validates :permalink, uniqueness: true, format: { with: ::PERMALINK_REGEX }
   validates :description, format: { with: ::DESCRIPTION_REGEX }
   validates :discount_price, numericality: { less_than_or_equal_to: :price }, allow_blank: true, if: :price?
+  validates_length_of :images, in: 1..3, too_short: 'must have atleast one image', too_long: 'cannot have more than 3 images'
 
   after_initialize :set_title, unless: :title?
   before_validation :set_discount_price, unless: :discount_price?

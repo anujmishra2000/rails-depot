@@ -1,4 +1,16 @@
 <div id="<%= dom_id product %>">
+
+<div class="slider">
+<% product.images.each do |img| %>
+  <%= image_tag(img, class: 'slider-img') %>
+  <% end %>
+</div>
+<div class="navigation-button">
+  <span class="dot active"></span>
+  <span class="dot"></span>
+  <span class="dot"></span>
+</div>
+
   <p>
     <strong>Title:</strong>
     <%= product.title %>
@@ -19,4 +31,13 @@
     <%= product.price %>
   </p>
 
+  <td class="actions">
+          <ul>
+            <li><%= link_to 'Edit', edit_product_path(product) %></li>
+            <li>
+              <%= link_to 'Destroy',  product, method: :delete, data: { confirm: 'Are you sure?' } %>
+            </li>
+          </ul>
+        </td>
 </div>
+<br

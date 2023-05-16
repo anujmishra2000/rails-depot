@@ -40,6 +40,20 @@
 
   </div>
 
+  Addresses:
+  <ul>
+    <%= form.fields_for :address do |addresses_form| %>
+        <%= addresses_form.label :state %>
+        <%= addresses_form.text_field :state %>
+        <%= addresses_form.label :city %>
+        <%= addresses_form.text_field :city %>
+        <%= addresses_form.label :country %>
+        <%= addresses_form.text_field :country %>
+        <%= addresses_form.label :pincode %>
+        <%= addresses_form.number_field :pincode %>
+    <% end %>
+  </ul>
+
   <div class="actions">
     <%= form.submit %>
   </div>

@@ -1,4 +1,4 @@
-<%= form_with(model: product, local: true) do |form| %>
+<%= form_with(model: product, local: true, multipart: true) do |form| %>
   <% if product.errors.any? %>
     <div id="error_explanation">
       <h2><%= pluralize(product.errors.count, "error") %>
@@ -22,10 +22,9 @@
     <%= form.text_area :description, rows: 10, cols: 60 %>
   </div>
 
-  <div class="field">
-    <%= form.label :image_url %>
-    <%= form.text_field :image_url %>
-  </div>
+
+  <%= form.label :images, "Upload images", style: "display: block" %>
+  <%= form.file_field :images, accept: 'image/jpg,image/jpeg', multiple: true %>
 
   <div class="field">
     <%= form.label :price %>
@@ -45,6 +44,11 @@
   <div class="field">
     <%= form.label :permalink %>
     <%= form.text_field :permalink %>
+  </div>
+
+  <div class="field">
+    <%= form.label :category_id, style: "display: block" %>
+    <%= form.collection_select :category_id, Category.order(:name), :id, :name, { include_blank: 'Select one' } %>
   </div>
 
   <div class="actions">

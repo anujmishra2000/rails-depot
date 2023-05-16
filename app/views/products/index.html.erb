@@ -1,3 +1,4 @@
+<%= javascript_pack_tag 'slider' %>
 <% if notice %>
   <aside id="notice"><%= notice %></aside>
 <% end %>
@@ -5,13 +6,6 @@
 <h1>Products</h1>
 
 <table>
-  <tfoot>
-    <tr>
-      <td colspan="3">
-        <%= link_to 'New Product', new_product_path %>
-      </td>
-    </tr>
-  </tfoot>
   <tbody>
     <% @products.each do |product| %>
       <tr class="<%= cycle('list_line_odd', 'list_line_even') %>">
@@ -32,7 +26,7 @@
             <li><%= link_to 'Show', product %></li>
             <li><%= link_to 'Edit', edit_product_path(product) %></li>
             <li>
-              <%= link_to 'Destroy',  product, 
+              <%= link_to 'Destroy',  product,
                           method: :delete,
                           data: { confirm: 'Are you sure?' } %>
             </li>
@@ -41,4 +35,11 @@
       </tr>
     <% end %>
   </tbody>
+  <tfoot>
+    <tr>
+      <td colspan="3">
+        <%= link_to 'New Product', new_product_path %>
+      </td>
+    </tr>
+  </tfoot>
 </table>

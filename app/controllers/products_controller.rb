@@ -1,11 +1,3 @@
-#---
-# Excerpted from "Agile Web Development with Rails 6",
-# published by The Pragmatic Bookshelf.
-# Copyrights apply to this code. It may not be used to create training material,
-# courses, books, articles, and the like. Contact us if you are in doubt.
-# We make no guarantees that this code is fit for any purpose.
-# Visit http://www.pragmaticprogrammer.com/titles/rails6 for more book information.
-#---
 class ProductsController < ApplicationController
   before_action :set_product, only: [:show, :edit, :update, :destroy]
 
@@ -13,6 +5,10 @@ class ProductsController < ApplicationController
   # GET /products.json
   def index
     @products = Product.all.order(:title)
+    respond_to do |format|
+      format.html { render :index }
+      format.json { render json: @products.joins(:category).select(:title, 'name as category_name') }
+    end
   end
 
   # GET /products/1
@@ -59,7 +55,7 @@ class ProductsController < ApplicationController
 
         @products = Product.all.order(:title)
         ActionCable.server.broadcast 'products',
-          html: render_to_string('store/index', layout: false)
+          { html: render_to_string('store/index', layout: false) }
       else
         format.html { render :edit }
         format.json { render json: @product.errors,
@@ -97,6 +93,6 @@ class ProductsController < ApplicationController
 
     # Only allow a list of trusted parameters through.
     def product_params
-      params.require(:product).permit(:title, :description, :image_url, :price)
+      params.require(:product).permit(:title, :description, :image_url, :price, :category_id, images: [])
     end
 end
