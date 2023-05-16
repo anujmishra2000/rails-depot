@@ -1,9 +1,9 @@
 <div id="<%= dom_id product %>">
 
 <div class="slider">
-  <%= image_tag(product.images.to_a.first, class: 'slider-img') if product.images.to_a.first %>
-  <%= image_tag(product.images.to_a.second, class: 'slider-img') if product.images.to_a.second %>
-  <%= image_tag(product.images.to_a.third, class: 'slider-img') if product.images.to_a.third %>
+<% product.images.to_a.each do |img| %>
+  <%= image_tag(img, class: 'slider-img') if img.present? %>
+  <% end %>
 </div>
 <div class="navigation-button">
   <span class="dot active"></span>
@@ -33,12 +33,9 @@
 
   <td class="actions">
           <ul>
-            <li><%= link_to 'Show', product %></li>
             <li><%= link_to 'Edit', edit_product_path(product) %></li>
             <li>
-              <%= link_to 'Destroy',  product,
-                          method: :delete,
-                          data: { confirm: 'Are you sure?' } %>
+              <%= link_to 'Destroy',  product, method: :delete, data: { confirm: 'Are you sure?' } %>
             </li>
           </ul>
         </td>

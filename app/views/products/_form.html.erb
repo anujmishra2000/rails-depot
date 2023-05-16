@@ -24,7 +24,7 @@
 
 
   <%= form.label :images, "Upload images", style: "display: block" %>
-  <%= form.file_field :images, multiple: true %>
+  <%= form.file_field :images, accept: 'image/jpg,image/jpeg', multiple: true %>
 
   <div class="field">
     <%= form.label :price %>

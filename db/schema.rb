@@ -63,7 +63,7 @@ ActiveRecord::Schema[7.0].define(version: 2023_05_11_095558) do
     t.string "city"
     t.string "country"
     t.integer "pincode"
-    t.integer "user_id"
+    t.integer "user_id", null: false
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.index ["user_id"], name: "index_addresses_on_user_id"

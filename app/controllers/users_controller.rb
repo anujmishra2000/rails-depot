@@ -1,5 +1,6 @@
 class UsersController < ApplicationController
   before_action :set_user, only: [:show, :edit, :update, :destroy]
+  layout "myorders", only: [:orders, :line_items]
   # GET /users
   # GET /users.json
   def index
@@ -72,12 +73,10 @@ class UsersController < ApplicationController
 
   def orders
     @orders = current_user.orders.paginate(page: params[:page], per_page: 5)
-    render layout: "myorders"
   end
 
   def line_items
     @line_items = current_user.line_items.paginate(page: params[:page], per_page: 5)
-    render layout: "myorders"
   end
 
   private

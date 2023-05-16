@@ -1,7 +1,19 @@
 <div id="<%= dom_id user %>">
   <p>
     <strong>Name:</strong>
-    <%= user.name %>
+    <%= user.name %><br>
+    <strong>Email:</strong>
+    <%= user.email %><br>
+    <strong>Address:</strong><br>
+    <strong>State:</strong>
+    <%= user.address&.state %><br>
+    <strong>Country:</strong>
+    <%= user.address&.country %><br>
+    <strong>City:</strong>
+    <%= user.address&.city %><br>
+    <strong>Pincode:</strong>
+    <%= user.address&.state %><br>
+    <br>
   </p>
 
 </div>
