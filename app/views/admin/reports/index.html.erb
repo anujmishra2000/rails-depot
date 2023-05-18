@@ -1,0 +1,14 @@
+<h3>Select Date range</h3>
+<%= form_with url: '/admin/reports', method: :get do |form| %>
+  From:
+  <%= form.date_field :from %>
+  <br>
+  To:
+  <%= form.date_field :to %>
+  <br>
+  <%= form.submit %>
+<% end %>
+<% @order.each_with_index do |order, index| %>
+  <h2>Order#<%= index + 1 %></h2>
+  <%= render partial: 'orders/order', object: order %>
+<% end %>

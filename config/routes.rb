@@ -1,5 +1,4 @@
 Rails.application.routes.draw do
-  get 'admin' => 'admin#index'
   controller :sessions do
     get  'login' => :new
     post 'login' => :create
@@ -27,6 +26,11 @@ Rails.application.routes.draw do
   end
 
   resources :support_requests, only: [ :index, :update ]
+
+  namespace :admin do
+    get 'reports', to: 'reports#index'
+    get 'categories', to: 'categories#index'
+  end
 
   scope '(:locale)' do
     resources :orders

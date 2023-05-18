@@ -1,0 +1,14 @@
+<table>
+  <tr>
+      <th>Category name</th>
+      <th>Parent category</th>
+      <th>Number of products</th>
+  </tr>
+  <% @categories.each do |category| %>
+    <tr>
+      <td><%= category.name %></td>
+      <td><%= category.parent.try(:name) || '-' %></td>
+      <td><%= category.products_count %></td>
+    </tr>
+  <% end %>
+</table>

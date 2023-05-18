@@ -16,6 +16,10 @@ class User < ApplicationRecord
   class Error < StandardError
   end
 
+  def admin?
+    role == 'admin'
+  end
+
   private
 
   def send_welcome_email

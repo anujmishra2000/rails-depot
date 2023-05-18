@@ -6,7 +6,7 @@
 
     <%= stylesheet_link_tag 'application', media: 'all',
                             'data-turbolinks-track': 'reload' %>
-    
+
     <%= javascript_pack_tag %>
     <script type="text/javascript">
       I18n.defaultLocale = "<%= I18n.default_locale %>";
@@ -21,7 +21,7 @@
     <header class="main">
       <aside>
         <%= form_tag store_index_path, class: 'locale' do %>
-          <%= select_tag 'set_locale', 
+          <%= select_tag 'set_locale',
             options_for_select(LANGUAGES, I18n.locale.to_s),
             onchange: 'this.form.submit()' %>
           <%= submit_tag 'submit', id: "submit_locale_change" %>
@@ -60,5 +60,9 @@
         <%= yield %>
       </main>
     </section>
+    <footer>
+      <div>Total Hit Count: <%= @hit_count %></div>
+      <div>Your Ip Address: <%= @client_ip %></div>
+    </footer>
   </body>
 </html>
