@@ -1,3 +1,7 @@
+<% if notice %>
+  <aside id="notice"><%= notice %></aside>
+<% end %>
+
 <section class="depot_form">
   <% if flash[:alert] %>
     <aside class="notice"><%= flash[:alert] %></aside>

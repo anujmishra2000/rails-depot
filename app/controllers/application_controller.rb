@@ -1,6 +1,10 @@
 class ApplicationController < ActionController::Base
   before_action :set_i18n_locale_from_params
   before_action :authorize
+  before_action :check_for_inactivity
+  before_action :get_client_ip
+  before_action :update_hit_count
+  around_action :attach_time_in_header
 
   helper_method :current_user
 
@@ -8,6 +12,31 @@ class ApplicationController < ActionController::Base
 
     def current_user
       @current_user ||= User.find_by_id(session[:user_id])
+    end
+
+    def check_for_inactivity
+      if session[:last_active] && ((Time.current - session[:last_active].to_time) > 5.minutes)
+        reset_session
+        redirect_to login_url, notice: 'You were inactive for a long time. Please log in again to activate your session.'
+      else
+        session[:last_active] = Time.current
+      end
+    end
+
+    def get_client_ip
+      @client_ip = request.ip
+    end
+
+    def attach_time_in_header
+      start_timer = Time.current
+      yield
+      response.header['x-responded-in'] = (Time.current - start_timer) * 1000
+    end
+
+    def update_hit_count
+      @@hit_count ||= 0
+      @@hit_count += 1
+      @hit_count = @@hit_count
     end
 
     def authorize

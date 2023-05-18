@@ -15,7 +15,8 @@ class SessionsController < ApplicationController
     user = User.find_by(name: params[:name])
     if user.try(:authenticate, params[:password])
       session[:user_id] = user.id
-      redirect_to admin_url
+      current_user.admin? ? (redirect_to admin_reports_url) : (redirect_to store_index_url)
+      session[:last_active] = Time.current
     else
       redirect_to login_url, alert: "Invalid user/password combination"
     end
