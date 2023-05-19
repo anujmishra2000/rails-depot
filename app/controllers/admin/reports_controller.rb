@@ -1,10 +1,8 @@
 class Admin::ReportsController < ApplicationController
+  before_action :is_admin?
+
   def index
-    if current_user.admin?
-      params[:from] ||= 5.days.ago
-      @order = Order.by_date(params[:from], params[:to])
-    else
-      redirect_to store_index_path, notice: "You don't have privilege to access this section"
-    end
+    params[:from] ||= 5.days.ago
+    @order = Order.by_date(params[:from], params[:to])
   end
 end

@@ -1,9 +1,11 @@
 class Admin::CategoriesController < ApplicationController
+  before_action :is_admin?
+
   def index
-    if current_user.admin?
-      @categories = Category.all
-    else
-      redirect_to store_index_path, notice: "You don't have privilege to access this section"
-    end
+    @categories = Category.all
+  end
+
+  def products
+    @category_products = Category.find(params[:id]).products +  Category.find(params[:id]).sub_categories_products
   end
 end

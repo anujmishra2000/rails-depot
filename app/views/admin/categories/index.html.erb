@@ -6,7 +6,7 @@
   </tr>
   <% @categories.each do |category| %>
     <tr>
-      <td><%= category.name %></td>
+      <td><%= link_to category.name, products_admin_category_path(category.id) %></td>
       <td><%= category.parent.try(:name) || '-' %></td>
       <td><%= category.products_count %></td>
     </tr>

@@ -52,6 +52,10 @@ class ApplicationController < ActionController::Base
       end
     end
 
+    def is_admin?
+      redirect_to store_index_path, notice: "You don't have privilege to access this section" unless current_user.admin?
+    end
+
     def set_i18n_locale_from_params
       if params[:locale]
         if I18n.available_locales.map(&:to_s).include?(params[:locale])
