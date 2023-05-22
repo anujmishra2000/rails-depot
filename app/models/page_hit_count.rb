@@ -1,0 +1,2 @@
+class PageHitCount < ApplicationRecord
+end
