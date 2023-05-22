@@ -4,7 +4,11 @@ class ProductsController < ApplicationController
   # GET /products
   # GET /products.json
   def index
-    @products = Product.all.order(:title)
+    if params[:category_id]
+      @products = Category.find(params[:category_id]).products +  Category.find(params[:category_id]).sub_categories_products
+    else
+      @products = Product.all.order(:title)
+    end
     respond_to do |format|
       format.html { render :index }
       format.json { render json: @products.joins(:category).select(:title, 'name as category_name') }
