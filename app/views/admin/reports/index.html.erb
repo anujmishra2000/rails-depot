@@ -1,9 +1,9 @@
 <h3>Select Date range</h3>
-<%= form_with url: '/admin/reports', method: :get do |form| %>
-  From:
+<%= form_with url: admin_reports_url, method: :get do |form| %>
+  <%= form.label :from, "From:" %>
   <%= form.date_field :from %>
   <br>
-  To:
+  <%= form.label :to, "To:" %>
   <%= form.date_field :to %>
   <br>
   <%= form.submit %>
