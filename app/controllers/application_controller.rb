@@ -34,9 +34,9 @@ class ApplicationController < ActionController::Base
     end
 
     def update_hit_count
-      @@hit_count ||= 0
-      @@hit_count += 1
-      @hit_count = @@hit_count
+      PAGE_PATH_REGEX =~ request.path
+      page_path = $1
+      @hit_count = PageHitCount.find_or_create_by!(path: page_path).increment!(:hit_count).hit_count
     end
 
     def authorize
