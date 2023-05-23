@@ -12,15 +12,15 @@ Rails.application.routes.draw do
 
     resources :users
 
-    resources :products, path: '/books' do
+    resources :products, path: :books do
       get :who_bought, on: :member
     end
 
     resources :support_requests, only: [ :index, :update ]
 
     resources :category do
-      resources :products, path: '/books', constraints: { category_id: DIGIT_REGEX }
-      resources :products, path: '/books', to: redirect('/')
+      resources :products, path: :books, constraints: { category_id: DIGIT_REGEX }
+      resources :products, path: :books, to: redirect('/')
     end
 
     namespace :admin do
@@ -32,8 +32,8 @@ Rails.application.routes.draw do
       resources :orders
       resources :line_items
       resources :carts
-      get '/my-orders', to: 'users#orders'
-      get '/my-items', to: 'users#line_items'
+      get 'my-orders', to: 'users#orders'
+      get 'my-items', to: 'users#line_items'
     end
   end
 end
