@@ -19,7 +19,7 @@ class ApplicationController < ActionController::Base
     end
 
     def check_for_inactivity
-      if current_user.last_active && ((Time.current - current_user.last_active.to_time) > 30.seconds)
+      if current_user.last_active && ((Time.current - current_user.last_active.to_time) > 5.minutes)
         reset_session
         redirect_to login_url, notice: 'You were inactive for a long time. Please log in again to activate your session.'
       else
