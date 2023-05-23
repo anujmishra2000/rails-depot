@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.0].define(version: 2023_05_22_053058) do
+ActiveRecord::Schema[7.0].define(version: 2023_05_23_052301) do
   create_table "action_mailbox_inbound_emails", force: :cascade do |t|
     t.integer "status", default: 0, null: false
     t.string "message_id", null: false
@@ -109,8 +109,8 @@ ActiveRecord::Schema[7.0].define(version: 2023_05_22_053058) do
   end
 
   create_table "page_hit_counts", force: :cascade do |t|
-    t.string "path"
-    t.integer "hit_count"
+    t.string "path", null: false
+    t.integer "hit_count", default: 0
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
   end
@@ -146,6 +146,7 @@ ActiveRecord::Schema[7.0].define(version: 2023_05_22_053058) do
     t.datetime "updated_at", null: false
     t.string "email"
     t.string "role", default: "user"
+    t.datetime "last_active"
   end
 
   add_foreign_key "active_storage_attachments", "active_storage_blobs", column: "blob_id"
