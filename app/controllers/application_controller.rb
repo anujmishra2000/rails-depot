@@ -1,7 +1,7 @@
 class ApplicationController < ActionController::Base
   before_action :set_i18n_locale_from_params
   before_action :authorize
-  before_action :check_for_inactivity
+  before_action :check_for_inactivity, if: :logged_in?
   before_action :get_client_ip
   before_action :update_hit_count
   around_action :attach_time_in_header
@@ -14,12 +14,16 @@ class ApplicationController < ActionController::Base
       @current_user ||= User.find_by_id(session[:user_id])
     end
 
+    def logged_in?
+      current_user.present?
+    end
+
     def check_for_inactivity
-      if session[:last_active] && ((Time.current - session[:last_active].to_time) > 5.minutes)
+      if current_user.last_active && ((Time.current - current_user.last_active.to_time) > 30.seconds)
         reset_session
         redirect_to login_url, notice: 'You were inactive for a long time. Please log in again to activate your session.'
       else
-        session[:last_active] = Time.current
+        current_user.update(last_active: Time.current)
       end
     end
 
