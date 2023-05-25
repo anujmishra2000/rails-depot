@@ -1,0 +1,94 @@
+hi:
+  layouts:
+    application:
+      title: "व्यावहारिक पुस्तक तख्त"
+      home: "मुखपृष्ठ"
+      questions: "सवाल"
+      news: "समाचार"
+      contact: "संपर्क"
+      orders: 'ऑर्डर'
+      products: 'उत्पाद'
+      users: 'उपभोक्ता'
+      logout: 'लॉग आउट'
+
+  carts:
+    cart:
+      title: "व्यावहारिक पुस्तक तख्त"
+      empty: 'खाली'
+      checkout: 'चेक आउट'
+
+  orders:
+    form:
+      name: 'नाम'
+      email: 'ईमेल'
+      address_html: 'पता'
+      pay_type: 'भुगतान प्रकार'
+      submit: 'जमा करना'
+
+
+  store:
+    index:
+      title_html: "व्यावहारिक पुस्तक तख्त"
+      add_html: "कार्ट में डालें"
+
+  order_mailer:
+    received:
+      subject: 'ऑर्डर पुष्टिकरण'
+      order_received: 'आपका ऑर्डर प्राप्त कर लिया गया है|'
+
+    send_orders_summary:
+      subject: 'ऑर्डर का सार'
+      orders_summary: 'आपके आज तक के सब ऑर्डर का सार|'
+
+  order: 'ऑर्डर'
+  models:
+    user: 'उपभोक्ता'
+    product: 'उत्पाद'
+    category: 'केटेगरी'
+
+  attributes:
+    product:
+      title: 'शीर्षक'
+      description: 'विवरण'
+      price: 'मूल्य'
+      discount_price: 'छूट मूल्य'
+      category: 'केटेगरी'
+      category_id: 'केटेगरी'
+
+    user:
+      name: 'नाम'
+      email: 'ईमेल'
+      role: भूमिका
+      password: 'पासवर्ड'
+      password_confirmation: 'पासवर्ड पुष्टिकरण'
+
+    order:
+      name: 'नाम'
+      email: 'ईमेल'
+      address: 'पता'
+      pay_type: 'भुगतान प्रकार'
+
+    address:
+      state: 'राज्य'
+      city: 'शहर'
+      country: 'देश'
+      pincode: 'पोस्टल इंडेक्स नंबर'
+
+  errors:
+    messages:
+      taken: ले लिया गया है|
+      blank: खाली है|
+      confirmation: अस्वीकृत है|
+      invalid: अमान्य है|
+      required: आवश्यक है|
+
+  errors:
+    template:
+      body: "नीचे वर्णित फील्ड में गल्तियाँ है|"
+      header:
+        one: "1 गलती के कारण यह %{model} नहीं बन सकता है|"
+        other: "%{count} गलतियों के कारण यह %{model} नहीं बन सकता है|"
+
+  sessions:
+    new:
+      already_logged: "आप पहले से लोग्गिएड इन है|"

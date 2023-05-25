@@ -4,6 +4,7 @@ class ApplicationController < ActionController::Base
   before_action :check_for_inactivity, if: :logged_in?
   before_action :get_client_ip
   before_action :update_hit_count
+  around_action :set_locale, if: :logged_in?
   around_action :attach_time_in_header
 
   helper_method :current_user
@@ -65,5 +66,10 @@ class ApplicationController < ActionController::Base
           logger.error flash.now[:notice]
         end
       end
+    end
+
+    def set_locale(&action)
+      locale = LANGUAGES.to_h[current_user.language.capitalize] || I18n.default_locale
+      I18n.with_locale(locale, &action)
     end
 end

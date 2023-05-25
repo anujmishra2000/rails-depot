@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.0].define(version: 2023_05_23_052301) do
+ActiveRecord::Schema[7.0].define(version: 2023_05_24_074627) do
   create_table "action_mailbox_inbound_emails", force: :cascade do |t|
     t.integer "status", default: 0, null: false
     t.string "message_id", null: false
@@ -147,6 +147,7 @@ ActiveRecord::Schema[7.0].define(version: 2023_05_23_052301) do
     t.string "email"
     t.string "role", default: "user"
     t.datetime "last_active"
+    t.string "language", default: "English"
   end
 
   add_foreign_key "active_storage_attachments", "active_storage_blobs", column: "blob_id"
