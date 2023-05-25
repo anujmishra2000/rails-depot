@@ -1,0 +1,13 @@
+<h2>Hi <%= @user.name.capitalize %>!</h2>
+<p><%= t('.orders_summary') %></p>
+<% @orders.each_with_index do |order, index| %>
+  <h3><%= t(:order) %>#<%= index + 1 %></h3>
+  <% order.line_items.each do |line_item| %>
+  <tr>
+    <td>Product: <%= line_item.product.title %></td>
+    <td>Quantity: <%= line_item.quantity %></td>
+  </tr>
+  <% end %>
+  <br>
+  Order Pay Type: <%= order.pay_type %>
+<% end %>

@@ -13,6 +13,11 @@ class User < ApplicationRecord
   before_destroy :ensure_do_not_destroy_admin
   before_update :ensure_do_not_update_admin
 
+  enum language: {
+    'English' => 'en',
+    'Hindi' => 'hi'
+  }
+
   class Error < StandardError
   end
 

@@ -1,5 +1,7 @@
-<h1>Order#received</h1>
-
-<p>
-  <%= @greeting %>, find me in app/views/order_mailer/received.html.erb
-</p>
+<h1><%= t('.order_received') %></h1>
+<% @order.line_items.each do |line_item| %>
+  <%= image_tag attachments["#{line_item.id}_first.jpg"].url %>
+  <h2>Product: <%= line_item.product.title %></h2>
+  <p>Quantity: <%= line_item.quantity %></p>
+  <p>Price: <%= line_item.total_price %></p>
+<% end %>
