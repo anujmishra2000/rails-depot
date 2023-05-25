@@ -11,6 +11,21 @@ hi:
       users: 'उपभोक्ता'
       logout: 'लॉग आउट'
 
+  carts:
+    cart:
+      title: "व्यावहारिक पुस्तक तख्त"
+      empty: 'खाली'
+      checkout: 'चेक आउट'
+
+  orders:
+    form:
+      name: 'नाम'
+      email: 'ईमेल'
+      address_html: 'पता'
+      pay_type: 'भुगतान प्रकार'
+      submit: 'जमा करना'
+
+
   store:
     index:
       title_html: "व्यावहारिक पुस्तक तख्त"
@@ -26,48 +41,46 @@ hi:
       orders_summary: 'आपके आज तक के सब ऑर्डर का सार|'
 
   order: 'ऑर्डर'
+  models:
+    user: 'उपभोक्ता'
+    product: 'उत्पाद'
+    category: 'केटेगरी'
 
-  activerecord:
-    models:
-      user: 'उपभोक्ता'
-      product: 'उत्पाद'
+  attributes:
+    product:
+      title: 'शीर्षक'
+      description: 'विवरण'
+      price: 'मूल्य'
+      discount_price: 'छूट मूल्य'
       category: 'केटेगरी'
+      category_id: 'केटेगरी'
 
-    attributes:
-      product:
-        title: 'शीर्षक'
-        description: 'विवरण'
-        price: 'मूल्य'
-        discount_price: 'छूट मूल्य'
-        category: 'केटेगरी'
-        category_id: 'केटेगरी'
+    user:
+      name: 'नाम'
+      email: 'ईमेल'
+      role: भूमिका
+      password: 'पासवर्ड'
+      password_confirmation: 'पासवर्ड पुष्टिकरण'
 
-      user:
-        name: 'नाम'
-        email: 'ईमेल'
-        role: भूमिका
-        password: 'पासवर्ड'
-        password_confirmation: 'पासवर्ड पुष्टिकरण'
+    order:
+      name: 'नाम'
+      email: 'ईमेल'
+      address: 'पता'
+      pay_type: 'भुगतान प्रकार'
 
-      order:
-        name: 'नाम'
-        email: 'ईमेल'
-        address: 'पता'
-        pay_type: 'भुगतान प्रकार'
+    address:
+      state: 'राज्य'
+      city: 'शहर'
+      country: 'देश'
+      pincode: 'पोस्टल इंडेक्स नंबर'
 
-      address:
-        state: 'राज्य'
-        city: 'शहर'
-        country: 'देश'
-        pincode: 'पोस्टल इंडेक्स नंबर'
-
-    errors:
-      messages:
-        taken: ले लिया गया है|
-        blank: खाली है|
-        confirmation: अस्वीकृत है|
-        invalid: अमान्य है|
-        required: आवश्यक है|
+  errors:
+    messages:
+      taken: ले लिया गया है|
+      blank: खाली है|
+      confirmation: अस्वीकृत है|
+      invalid: अमान्य है|
+      required: आवश्यक है|
 
   errors:
     template:
